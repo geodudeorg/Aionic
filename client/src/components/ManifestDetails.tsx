@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
+import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
+
 
 function ManifestDetails(props) {
   const [mani, setMani] = useState([]);
+  
+  //load each manifest for display
   useEffect(() => {
     console.log(props.details)
     // const manifests = JSON.parse(props.details[0].manifest);
@@ -12,7 +16,6 @@ function ManifestDetails(props) {
     for (const obj of props.details) {
       if (obj.revision === props.sha) {
         const manifests = JSON.parse(obj.manifest)
-        console.log('hit if statement: ', obj)
         for (const manifest of manifests) {
           stateArr.push(
             <div>
@@ -22,45 +25,60 @@ function ManifestDetails(props) {
         }
       }
     }
-  
     setMani(stateArr)
   }, [])
 
+  //back button
   const handleClick = e => {
     e.preventDefault();
     props.setDetail(false);
   }
+
+  //push to git
+  const handleGit =  (e) => {
+    e.preventDefault();
+    const octokit = new Octokit({
+      auth: 'AUTH HERE'
+    })
+   octokit.request('PATCH /repos/{owner}/{repo}/git/refs/heads/{ref}', {
+      owner: 'aribengiyat',
+      repo: 'docker-development-youtube-series',
+      ref: 'master',
+     sha: props.sha,
+      force: true
+   })
+    // octokit.request('GET /repos/{owner}/{repo}/git/matching-refs/{ref}',
+    //   {
+    //     owner: 'aribengiyat',
+    //     repo: 'docker-development-youtube-series',
+    //     ref: 'main'
+    //   })
+      //  octokit.request('GET /repos/{owner}/{repo}/git/matching-refs/{ref}',
+      // {
+      //   owner: 'aribengiyat',
+      //   repo: 'docker-development-youtube-series',
+      //   ref: 'main'
+      // })
+     .then((data) => {
+       console.log('res is: ', data)
+     })
+     .catch((err) => {
+      console.log('error occured: ', err)
+     })
+    
+   
+  }
+
+
   return (
     <div>
       <button onClick={(e)=>handleClick(e)}>Back</button>
       <h1>Manifest Details</h1>
       {mani}
-      <button>Push to git</button>
+      <button onClick={(e)=>handleGit(e)}>Push to git</button>
     </div>
   )
 }
 
 export default ManifestDetails;
 
-// const stateArr: any = [];
-    // fetch('http://localhost:3000/api/manifests?' + new URLSearchParams({
-    //   uid: state.query.uid
-    // }))
-    //   .then((data: Response) => data.json())
-    //   .then((data: any) => {
-    //     console.log('manifests are: ', data);
-      
-    //     for (const manifest of data) {
-    //       const parsed = JSON.parse(manifest.manifest);
-    //       for (const parsedMan of parsed) {
-    //         stateArr.push(
-    //           <div>
-    //             <p>Github hash is: {manifest._id}</p>
-    //             <p>{parsedMan}</p>
-    //           </div>
-    //         )
-    //       }
-        
-    //     }
-    //     setMlList(stateArr)
-    //   })

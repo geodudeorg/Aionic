@@ -29,7 +29,6 @@ function ManifestList() {
         for (const el of data) {
           stateArr.push(
             <div>
-              <button onClick={(e)=>handleBack(e)}>Back to all apps</button>
               <h2>These are the manifests for git sha: <span>{el.revision}</span></h2>
               <button onClick={(e) => handleClick(e)}>Click to see all manifests from that date</button>
             </div>
@@ -45,7 +44,7 @@ function ManifestList() {
 
   const handleClick = e => {
     e.preventDefault();
-    const gitSha = e.target.parentNode.childNodes[1].childNodes[1].innerText
+    const gitSha = e.target.parentNode.childNodes[0].childNodes[1].innerText
     console.log(mlList)
     setDetail(true);
     setSha(gitSha);
@@ -57,6 +56,7 @@ function ManifestList() {
   if (!detail) {
     return (
       <div>
+        <button onClick={(e) => handleBack(e)}>Back to all apps</button>
         {mlList}
       </div>
     )
