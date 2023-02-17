@@ -150,7 +150,9 @@ module.exports = {
   async addKey(req, res, next) {
     try {
       const { api_key, url } = req.body
+      console.log(api_key, url)
       let data = await ApiKey.create({ api_key, url })
+      console.log(data)
       return next();
     }
     catch(err) {

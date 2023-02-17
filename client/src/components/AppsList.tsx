@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 
-function AppsList() {
+function AppsList(props) {
 
   interface dbObj {
     name: string,
@@ -34,7 +34,7 @@ function AppsList() {
 
       //add username here not in parent
     fetch('http://localhost:3000/api/apps?' + new URLSearchParams({
-      user: 'aribengiyat'
+      user: props.gitUsername
     }))
       .then((data: Response) => data.json())
       .then((data) => {

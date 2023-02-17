@@ -8,24 +8,31 @@ function ManifestDetails(props) {
   
   //load each manifest for display
   useEffect(() => {
-    console.log(props.details)
+    console.log('we have passed down: ',props.details)
     // const manifests = JSON.parse(props.details[0].manifest);
     console.log('child has these: ', props.details)
     const stateArr = [];
+    let counter = 0;
     // loop over passed in array to find correct manifests
     for (const obj of props.details) {
       if (obj.revision === props.sha) {
         const manifests = JSON.parse(obj.manifest)
         for (const manifest of manifests) {
+          if (counter >= manifests.length) {
+            setMani(stateArr);
+            return;
+          }
           stateArr.push(
             <div>
               <p>{manifest}</p>
             </div>
           )
+          counter++;
+          console.log(stateArr);
+          setMani(stateArr)
         }
       }
     }
-    setMani(stateArr)
   }, [])
 
   //back button
@@ -47,18 +54,6 @@ function ManifestDetails(props) {
      sha: props.sha,
       force: true
    })
-    // octokit.request('GET /repos/{owner}/{repo}/git/matching-refs/{ref}',
-    //   {
-    //     owner: 'aribengiyat',
-    //     repo: 'docker-development-youtube-series',
-    //     ref: 'main'
-    //   })
-      //  octokit.request('GET /repos/{owner}/{repo}/git/matching-refs/{ref}',
-      // {
-      //   owner: 'aribengiyat',
-      //   repo: 'docker-development-youtube-series',
-      //   ref: 'main'
-      // })
      .then((data) => {
        console.log('res is: ', data)
      })

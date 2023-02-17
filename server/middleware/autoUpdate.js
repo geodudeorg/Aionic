@@ -52,14 +52,14 @@ function checkAppsUpdate (url, api_key) {
     catch (err) {
       // console.error('server/middleware/updateAppList.js checkAppsUpdate', err)
     }
-  }, 60000)
+  }, 5000)
 }
 
 //factory function checks for manifest updates
 function checkManifestUpdate(app, url, api_key) {
   this.apikey = api_key
   this.url = url
-  this.time = 60000
+  this.time = 5000
   this.checkingManifest = false;
   this.app = app
   this.intervalId = undefined

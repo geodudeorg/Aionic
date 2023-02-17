@@ -1,7 +1,7 @@
 const keys = require('../keys.js')
 const mongoose = require('mongoose')
 const {Schema} = mongoose
-const uri = `mongodb+srv://${keys.MongoUser}:${keys.MongoPassword}@cluster0.axjjrae.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2`;
 // const uri = 'mongodb://127.0.0.1:27017'
 
 mongoose.connect(uri, {

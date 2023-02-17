@@ -22,10 +22,10 @@ function TokenInput(props: props) {
     e.preventDefault();
   
 
-    const req = { api_key: argoTokenValue, url: argoUrlValue };
+    const req = { api_key: argoTokenValue, url: argoUrlValue, githubId: 'aribengiyat' };
     console.log(req);
 
-    fetch('http://localhost:3000/db/addToken', {
+    fetch('http://localhost:3000/api/userapikey', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
