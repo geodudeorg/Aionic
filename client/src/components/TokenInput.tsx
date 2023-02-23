@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { GitUserContext } from './Protected';
 
 interface tokens {
   argo: boolean;
@@ -17,12 +18,17 @@ function TokenInput(props: props) {
   const [argoTokenValue, setArgoTokenValue] = useState('');
   const [argoUrlValue, setArgoUrlValue] = useState('');
   const [gitTokenValue, setGitTokenValue] = useState('');
+  const useContextHandler = useContext(GitUserContext);
+  console.log('useContextHandler in tokeninput', useContextHandler);
 
   const handleArgoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  
 
-    const req = { api_key: argoTokenValue, url: argoUrlValue, githubId: 'aribengiyat' };
+    const req = {
+      api_key: argoTokenValue,
+      url: argoUrlValue,
+      githubId: 'nathanmlui', //should change to UseContextHandler
+    };
     console.log(req);
 
     fetch('http://localhost:3000/api/userapikey', {
