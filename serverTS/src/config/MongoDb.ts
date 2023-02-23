@@ -1,8 +1,8 @@
-import keys from '../keys'
 import mongoose, { Schema } from 'mongoose'
 import * as T from '../types'
+import { config } from '../keys'
 
-const uri = `mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2`
+const uri = config.mongodb_uri;
 
 
 mongoose.connect(uri, {
