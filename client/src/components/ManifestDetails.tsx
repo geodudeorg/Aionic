@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
 
@@ -8,7 +8,8 @@ function ManifestDetails(props) {
   
   //load each manifest for display
   useEffect(() => {
-    console.log('we have passed down: ',props.details)
+    console.log('we have passed down: ', props.details)
+    console.log('github context is: ',)
     // const manifests = JSON.parse(props.details[0].manifest);
     console.log('child has these: ', props.details)
     const stateArr = [];

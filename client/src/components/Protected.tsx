@@ -1,10 +1,15 @@
 import { Outlet } from "react-router";
-import { useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import App from "../App";
 
 function Protected() {
   const [isLoggedIn, setIsLoggedIn] = useState();
   const [username, setUsername] = useState('');
+
+  interface gitContextType {
+    gitUser: string
+  }
+  const gitContext = createContext<gitContextType>({gitUser: username});
 
   const handleClick = (e) => {
     e.preventDefault();
