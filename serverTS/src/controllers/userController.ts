@@ -40,6 +40,7 @@ export const patchUserGitToken = async (req: Request, res: Response, next: NextF
 export const getUserToken = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
       const { user } = req.query;
+      console.log('username from usertoken mw is: ', user)
       let data: T.User = await User.findOne({ githubId: user });
       if (data.argo_tokens.length < 1) {
         return res.status(400).json({

@@ -49,7 +49,7 @@ app.get('/', authController.isLoggedIn, (req:Request,res: Response)=> {
   return res.json('success')
 })
 
-app.get('/api', apiRouter)
+app.use('/api', apiRouter)
 
 app.use('*', (req: Request,res: Response)=> {
   return res.status(404).send({
@@ -65,6 +65,7 @@ app.use((err:types.error | any, req: Request, res: Response, next:NextFunction) 
     log: 'if you see this text you did not setup error handling -.-;;'
   }
   err = Object.assign(error, err)
+  console.log(error.log);
   return res.status(err.status).send(err) 
 })
 

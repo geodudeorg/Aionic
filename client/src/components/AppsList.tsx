@@ -34,7 +34,7 @@ function AppsList(props) {
 
       //add username here not in parent
     fetch('http://localhost:3000/api/apps?' + new URLSearchParams({
-      user: props.gitUsername
+      user: 'aribengiyat'
     }))
       .then((data: Response) => data.json())
       .then((data) => {

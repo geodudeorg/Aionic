@@ -23,7 +23,7 @@ function AppsHub() {
         console.log('git username is: ', data.githubId);
         let username = data.githubId
         fetch('http://localhost:3000/api/argoToken?' + new URLSearchParams({
-          user: username
+          user: 'aribengiyat'
         }))
           .then((data: Response) => data.json())
           .then((data: []) => {
@@ -48,7 +48,7 @@ function AppsHub() {
       .catch((err) => console.log(err));
   }, []);
 
-  if (argo) {
+  if (!argo) {
     return (
       <div>
         <AppsList gitUsername={gitUsername } />
