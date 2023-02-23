@@ -41,6 +41,7 @@ function AppsList(props) {
         //they are objects with two elements, name and uid
         const stateObj: Data  = {};
         for (const app of data) {
+          console.log('apps being returned are: ', data);
           stateObj[app.name] = app;
           appsArr.push(
             <div>
